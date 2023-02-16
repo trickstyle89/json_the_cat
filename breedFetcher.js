@@ -1,13 +1,12 @@
 const request = require('request');
-
 const args = process.argv.slice(2);
 
-const searchCats = (args) => {
+const fetchBreedDescription = (args) => {
   const [breed] = args;
-  request(`https://api.thecatapi.com/v1/breeds/search?q=${breed}`, (error, response, body) => {
-    if (error) {
+  request(`https://api.thecatapi.com/v1/breeds/search?q=${breed}`, (error, desc, body) => {
+      if (error) {
       console.log(error);
-    } else {
+     } else {
       let data = JSON.parse(body);
       if (data.length === 0) {
         console.log('no data found');
@@ -17,6 +16,6 @@ const searchCats = (args) => {
     }
   });
 };
-searchCats(args);
+fetchBreedDescription(args);
 
-module.exports = searchCats;
+module.exports = { fetchBreedDescription };
